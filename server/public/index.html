@@ -18,15 +18,18 @@
       <button id= 'divide' onclick="selectThisOperator(event)" class="active">/</button>
       <input id = secondNum type="number" placeholder="Second Number">
       <button onclick="postCalcObject(event)">=</button>
-      <button ondblclick="clearFormFields()">C</button>
+      <button onclick="clearHistory(event)">C</button>
     </form>
 
-    <section data-testid="recentResult">
+    <section data-testid="recentResult" id="recentResult">
       <!-- The most recent calculation result goes here. -->
     </section>
 
     <section data-testid="resultHistory">
       <!-- The list of calculation results goes here. -->
+      <ul id="listOfResults">
+        
+      </ul>
     </section>
   </body>
 </html>

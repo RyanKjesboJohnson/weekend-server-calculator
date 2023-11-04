@@ -24,16 +24,44 @@ function clearFormFields() {
     document.getElementById("secondNum").value = '';
 }
 
+//This function clears all the fields on the page when the 'C' button is pressed
+function clearHistory(event) {
+    if(zuzu){console.log("this is the clearHistory function")};
+    event.preventDefault();
+    clearFormFields();
+    document.getElementById('listOfResults').innerHTML = `<p></p>`;
+    document.getElementById("recentResult").innerHTML = `<p></p>`; 
+    deleteHistory();
+ 
+}
+
+//This function sends a delete request to the server,
+//it then deletes the calculations array on the server
+function deleteHistory() {
+    if(zuzu){console.log("this is the deleteHistory function.  Don't worry, while our history is deleted from the server it will never be from our heart")};
+    axios({
+        url: '/calculations',
+        method: 'DELETE'
+    }).then((response) => {console.log('response data:', response.data)
+    getCaculations();
+})
+}
+
+//This GET function gets the calculations array from server
+//It sets its value as the value of the calculationHistory variable
+//Then it begins the renderCalculationsResponse function
 function getCaculations(){
-        axios({
+    if(zuzu){console.log("this is the getCalculations function")};
+    axios({
             url: '/calculations',
             method: 'GET'
-        }).then((response) => {console.log('response data:', response.data)
+        }).then((response) => {
+        console.log('response data:', response.data)
         calculationHistory = response.data;
-        renderCalculationsResponse();
-    })
+        if(calculationHistory.length > 0){
+            renderCalculationsResponse();}
+        })
     }
-
 
 //This function removes the active class from any operator.
 //This function appears in functions: selectThisOperator, onReady
@@ -49,6 +77,7 @@ function inactivateOperators() {
 function onReady() {
     if(zuzu){console.log("this is the startup function of the client side server")};
     inactivateOperators();
+    getCaculations();
 }
 
 //This function is onclick of the equals sign
@@ -76,9 +105,19 @@ function postCalcObject(event){
     )
 }
 
+//This function sets the DOM contents for the recent result
+//Then it loops through the history and adds them to an unordered list
 function renderCalculationsResponse() {
+    if(zuzu){console.log("this is the renderCalculationsResponse function")};
+    // if(document.getElementById(listOfResults) !== ''){
     let recentResult = calculationHistory[calculationHistory.length - 1];
+    document.getElementById("listOfResults").innerHTML = ``
     // console.log(recentResult);
+    document.getElementById("recentResult").innerHTML = `<h2>${recentResult.result}</h2>`;
+        for (let calc of calculationHistory){
+        document.getElementById("listOfResults").innerHTML +=
+        `<li>${calc.numOne} ${calc.operator} ${calc.numTwo} = ${calc.result}</li>`
+    }
 } 
 
 //This function will run when someone clicks on an operator, it will

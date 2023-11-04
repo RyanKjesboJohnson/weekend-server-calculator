@@ -53,7 +53,10 @@ app.post('/calculations', (req, res) => {
   res.sendStatus(201)
 })
 
-
+app.delete('/calculations', (req, res) => {
+  calculations = [];
+  res.sendStatus(200);
+})
 
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
