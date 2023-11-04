@@ -11,13 +11,21 @@ let calculations = []
 
 // Here's a wonderful place to make some routes:
 
+//FUNCTIONS
+// function calculate(req.body.numOne,req.body.numTwo) {
+//   result = numone operator numTwo
+//   console.log(result);
+// }
+// calculate({numOne})
+
 // GET /calculations
+
 
 // POST /calculations
 
 //This post route receives uncalculated objects
-app.post('/incompleteCalculation', (req, res) => {
-  console.log('POST /incompleteCalculation received a request:' )
+app.post('/calculations', (req, res) => {
+  console.log('POST /calculations received a request:' )
   console.log('req.body', req.body)
   res.sendStatus(201)
 })

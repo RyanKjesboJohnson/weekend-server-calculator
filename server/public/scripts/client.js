@@ -53,7 +53,7 @@ function postCalcObject(event){
     if(zuzu){console.log("This is the uncalculated item being sent to server:", uncalculatedObject)};
     axios({
         method: 'POST',
-        url: '/incompleteCalculation',
+        url: '/calculations',
         data: uncalculatedObject
     }).then((response) => {
         console.log('the server got my calculation')
