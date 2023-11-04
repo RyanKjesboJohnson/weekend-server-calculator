@@ -1,0 +1,4 @@
+/* Apply this class if a button is the active button */
+.active {
+    background-color: dimgrey;
+}
