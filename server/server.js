@@ -15,6 +15,15 @@ let calculations = []
 
 // POST /calculations
 
+//This post route receives uncalculated objects
+app.post('/incompleteCalculation', (req, res) => {
+  console.log('POST /incompleteCalculation received a request:' )
+  console.log('req.body', req.body)
+  res.sendStatus(201)
+})
+
+
+
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸
