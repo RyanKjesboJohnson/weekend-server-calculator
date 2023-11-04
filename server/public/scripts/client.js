@@ -8,6 +8,7 @@ console.log('client.js is sourced!');
 //These are global variables:
 
 let currentOperator;
+let calculationHistory = [];
 // console.log(currentOperator);
 let zuzu = true;
 
@@ -22,6 +23,17 @@ function clearFormFields() {
     document.getElementById("firstNum").value = '';
     document.getElementById("secondNum").value = '';
 }
+
+function getCaculations(){
+        axios({
+            url: '/calculations',
+            method: 'GET'
+        }).then((response) => {console.log('response data:', response.data)
+        calculationHistory = response.data;
+        renderCalculationsResponse();
+    })
+    }
+
 
 //This function removes the active class from any operator.
 //This function appears in functions: selectThisOperator, onReady
@@ -42,9 +54,10 @@ function onReady() {
 //This function is onclick of the equals sign
 //it takes values from the form and posts to server
 function postCalcObject(event){
+    if(zuzu){console.log("this is the postCalcObject function");}
     event.preventDefault();
-    let firstNum = document.getElementById('firstNum').value;
-    let secondNum = document.getElementById('secondNum').value;;
+    let firstNum = Number(document.getElementById('firstNum').value);
+    let secondNum = Number(document.getElementById('secondNum').value);
     let uncalculatedObject = {
         numOne: firstNum,
         numTwo: secondNum,
@@ -58,9 +71,15 @@ function postCalcObject(event){
     }).then((response) => {
         console.log('the server got my calculation')
         clearFormFields();
+        getCaculations();
     }
     )
 }
+
+function renderCalculationsResponse() {
+    let recentResult = calculationHistory[calculationHistory.length - 1];
+    // console.log(recentResult);
+} 
 
 //This function will run when someone clicks on an operator, it will
 // run the unclick function first to remove active from any operator,

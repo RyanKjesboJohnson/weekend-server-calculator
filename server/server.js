@@ -11,15 +11,33 @@ let calculations = []
 
 // Here's a wonderful place to make some routes:
 
-//FUNCTIONS
-// function calculate(req.body.numOne,req.body.numTwo) {
-//   result = numone operator numTwo
-//   console.log(result);
-// }
-// calculate({numOne})
+// FUNCTIONS
+// This function takes in an uncalculated object (not containing result)
+// It then calculates based on the operator, and
+// returns the result
+function calculate(uncalculatedObject) {
+  let numOne = uncalculatedObject.numOne;
+  let numTwo = uncalculatedObject.numTwo;
+  let operator = uncalculatedObject.operator;
+  let result;
+  if (operator === '+'){
+    result = numOne + numTwo}
+    else if (operator === '-'){
+      result = numOne - numTwo}
+    else if (operator === '*'){
+      result = numOne * numTwo}
+    else if (operator === '/'){
+      result = numOne / numTwo}
+  uncalculatedObject.result = result;
+  return uncalculatedObject;
+  // console.log(uncalculatedObject);
+}
 
 // GET /calculations
-
+app.get('/calculations', (req, res) => {
+  console.log('GET /interests received a request!')
+  res.send(calculations)
+})
 
 // POST /calculations
 
@@ -27,6 +45,11 @@ let calculations = []
 app.post('/calculations', (req, res) => {
   console.log('POST /calculations received a request:' )
   console.log('req.body', req.body)
+  let uncalculatedObject = req.body;
+  // console.log(uncalculatedObject);
+  calculate(uncalculatedObject);
+  console.log(uncalculatedObject);
+  calculations.push(uncalculatedObject);
   res.sendStatus(201)
 })
 
