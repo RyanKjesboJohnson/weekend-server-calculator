@@ -92,6 +92,10 @@ function postCalcObject(event){
         numTwo: secondNum,
         operator: currentOperator
     }
+    console.log(event, document.getElementById('secondNum'));
+    if (firstNum.length === 0) {
+        alert("You have not provided necessary inputs to complete this calculation.")
+    } else {
     if(zuzu){console.log("This is the uncalculated item being sent to server:", uncalculatedObject)};
     axios({
         method: 'POST',
@@ -103,7 +107,7 @@ function postCalcObject(event){
         getCalculations();
     }
     )
-}
+}}
 
 //This function sets the DOM contents for the recent result
 //Then it loops through the history and adds them to an unordered list

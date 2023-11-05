@@ -11,12 +11,12 @@
     <h1>Server-Side Calculator</h1>
 
     <form data-testid="calculator">
-      <input id = firstNum placeholder="First Number">
+      <input id = firstNum required type="text" placeholder="First Number">
       <button id= 'plus' onclick="selectThisOperator(event)" class="inactive">+</button>
       <button id= 'minus' onclick="selectThisOperator(event)" class="inactive">-</button>
       <button id= 'times' onclick="selectThisOperator(event)" class="inactive">*</button>
       <button id= 'divide' onclick="selectThisOperator(event)" class="active">/</button>
-      <input id = secondNum type="number" placeholder="Second Number">
+      <input id = secondNum required type="text" placeholder="Second Number">
       <button onclick="postCalcObject(event)">=</button>
       <button onclick="clearHistory(event)">C</button>
     </form>
