@@ -43,14 +43,14 @@ function deleteHistory() {
         url: '/calculations',
         method: 'DELETE'
     }).then((response) => {console.log('response data:', response.data)
-    getCaculations();
+    getCalculations();
 })
 }
 
 //This GET function gets the calculations array from server
 //It sets its value as the value of the calculationHistory variable
 //Then it begins the renderCalculationsResponse function
-function getCaculations(){
+function getCalculations(){
     if(zuzu){console.log("this is the getCalculations function")};
     axios({
             url: '/calculations',
@@ -77,7 +77,7 @@ function inactivateOperators() {
 function onReady() {
     if(zuzu){console.log("this is the startup function of the client side server")};
     inactivateOperators();
-    getCaculations();
+    getCalculations();
 }
 
 //This function is onclick of the equals sign
@@ -100,7 +100,7 @@ function postCalcObject(event){
     }).then((response) => {
         console.log('the server got my calculation')
         clearFormFields();
-        getCaculations();
+        getCalculations();
     }
     )
 }
