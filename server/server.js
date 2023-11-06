@@ -8,6 +8,8 @@ app.use(express.static('server/public'));
 // calculation objects:
 let calculations = []
 
+//The client.js file has a variable called Zuzu (my dog's name), 
+//and if true the console logs will show.
 
 // Here's a wonderful place to make some routes:
 
@@ -34,6 +36,8 @@ function calculate(uncalculatedObject) {
 }
 
 // GET /calculations
+
+// This function returns a history of calculations to the client
 app.get('/calculations', (req, res) => {
   console.log('GET /interests received a request!')
   res.send(calculations)
@@ -53,6 +57,7 @@ app.post('/calculations', (req, res) => {
   res.sendStatus(201)
 })
 
+//This delete route deletes the calculations history
 app.delete('/calculations', (req, res) => {
   calculations = [];
   res.sendStatus(200);

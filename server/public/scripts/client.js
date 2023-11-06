@@ -10,7 +10,7 @@ console.log('client.js is sourced!');
 let currentOperator;
 let calculationHistory = [];
 // console.log(currentOperator);
-let zuzu = true;
+let zuzu = false;
 
 //FUNCTIONS
 //************************************************ */
@@ -56,7 +56,7 @@ function getCalculations(){
             url: '/calculations',
             method: 'GET'
         }).then((response) => {
-        console.log('response data:', response.data)
+        if(zuzu){console.log('response data:', response.data)}
         calculationHistory = response.data;
         if(calculationHistory.length > 0){
             renderCalculationsResponse();}
@@ -71,6 +71,7 @@ function inactivateOperators() {
     document.getElementById('minus').classList.remove("active");
     document.getElementById('times').classList.remove("active");
     document.getElementById('divide').classList.remove("active");
+    currentOperator = '';
 }
 
 //This function runs when the page is loaded.
@@ -92,11 +93,13 @@ function postCalcObject(event){
         numTwo: secondNum,
         operator: currentOperator
     }
-    console.log(event, document.getElementById('secondNum'));
-    if (firstNum.length === 0) {
-        alert("You have not provided necessary inputs to complete this calculation.")
-    } else {
+    // console.log(event, document.getElementById('secondNum'));
     if(zuzu){console.log("This is the uncalculated item being sent to server:", uncalculatedObject)};
+    if(document.getElementById('firstNum').value == '' || document.getElementById('secondNum').value == ''){
+        alert("Please fill in both numbers")}
+        else if (currentOperator.length < 1){
+        alert("Please choose an operator function below")} 
+        else {    
     axios({
         method: 'POST',
         url: '/calculations',
@@ -105,8 +108,7 @@ function postCalcObject(event){
         console.log('the server got my calculation')
         clearFormFields();
         getCalculations();
-    }
-    )
+    })
 }}
 
 //This function sets the DOM contents for the recent result
